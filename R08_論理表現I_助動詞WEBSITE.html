@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>たのしい助動詞マスター！ - Interactive English Auxiliary Verbs App</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;600;700;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"M PLUS Rounded 1c"', 'Nunito', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              yellow: '#FFD166',
+              pink: '#FF6B6B',
+              teal: '#4ECDC4',
+              blue: '#1A535C',
+              purple: '#A06CD5',
+              softBg: '#F7F9FC'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      background-color: #F4F7FE;
+    }
+    .card-flip {
+      perspective: 1000px;
+    }
+    .card-inner {
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+    .card-flip.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+    .card-front, .card-back {
+      backface-visibility: hidden;
+    }
+    .card-back {
+      transform: rotateY(180deg);
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #4ECDC4;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body class="text-gray-800 min-h-screen flex flex-col">
+
+  <!-- Navigation Header -->
+  <header class="bg-white shadow-md sticky top-0 z-50 border-b-4 border-brand-yellow">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="bg-brand-pink text-white w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-xl shadow-lg transform rotate-3">
+          助
+        </div>
+        <div>
+          <h1 class="text-xl md:text-2xl font-extrabold text-brand-blue tracking-wide">
+            たのしい助動詞マスター！ <span class="text-sm font-bold text-brand-pink bg-pink-100 px-2 py-0.5 rounded-full">論理・表現I L6</span>
+          </h1>
+          <p class="text-xs text-gray-500 font-medium">高校英語助動詞（can / may / must / should など）をマスターしよう！</p>
+        </div>
+      </div>
+
+      <!-- Main Navigation Tabs -->
+      <nav class="flex gap-1 md:gap-2 mt-2 sm:mt-0 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
+        <button onclick="switchTab('grammar')" id="nav-grammar" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold transition flex items-center gap-1.5 bg-brand-teal text-white shadow-md">
+          <i class="fa-solid fa-book-open"></i> 文法ノート
+        </button>
+        <button onclick="switchTab('practice')" id="nav-practice" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold text-gray-600 hover:bg-gray-100 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-pen-to-square"></i> 問題演習
+        </button>
+        <button onclick="switchTab('verbs')" id="nav-verbs" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold text-gray-600 hover:bg-gray-100 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-bolt"></i> 動詞バンク
+        </button>
+        <button onclick="switchTab('nouns')" id="nav-nouns" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold text-gray-600 hover:bg-gray-100 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-apple-whole"></i> 名詞バンク
+        </button>
+        <button onclick="switchTab('flashcard')" id="nav-flashcard" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold text-gray-600 hover:bg-gray-100 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-clone"></i> フラッシュカード
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="flex-grow max-w-7xl w-full mx-auto p-4 md:p-6">
+
+    <!-- ==================== TAB 1: GRAMMAR EXPLORER (文法ノート) ==================== -->
+    <section id="tab-grammar" class="tab-content space-y-6">
+      
+      <!-- Intro Card -->
+      <div class="bg-gradient-to-r from-teal-400 via-emerald-400 to-cyan-500 rounded-3xl p-6 text-white shadow-xl relative overflow-hidden">
+        <div class="relative z-10 max-w-2xl">
+          <span class="bg-white/20 text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider mb-2 inline-block">助動詞ってなぁに？</span>
+          <h2 class="text-2xl md:text-3xl font-extrabold mb-3">助動詞は「人の気持ち・思い」をプラスする魔法の道具！✨</h2>
+          <p class="text-sm md:text-base leading-relaxed opacity-95">
+            例えば、<strong class="bg-white/20 px-2 py-0.5 rounded">"I play the piano."</strong> は「ピアノを弾く」という事実だけ。<br>
+            そこに助動詞を足すと…<br>
+            <span class="inline-block mt-2 font-bold bg-white text-teal-800 px-2.5 py-1 rounded-lg text-sm">can play</span> （弾けるよ能力） / 
+            <span class="inline-block font-bold bg-white text-teal-800 px-2.5 py-1 rounded-lg text-sm">must play</span> （弾かなきゃ義務） / 
+            <span class="inline-block font-bold bg-white text-teal-800 px-2.5 py-1 rounded-lg text-sm">might play</span> （弾くかも推量）<br>
+            動詞の前に置くだけで「話す人のニュアンス」がパッと加わります！
+          </p>
+        </div>
+        <i class="fa-solid fa-wand-magic-sparkles text-8xl absolute -right-4 -bottom-4 opacity-20 transform -rotate-12"></i>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="flex flex-wrap gap-2 border-b border-gray-200 pb-3">
+        <button onclick="filterGrammar('all')" class="g-filter-btn active bg-brand-purple text-white px-4 py-2 rounded-xl text-sm font-bold shadow-sm">すべて</button>
+        <button onclick="filterGrammar('can')" class="g-filter-btn bg-white text-gray-700 hover:bg-gray-100 px-4 py-2 rounded-xl text-sm font-bold border border-gray-200">① can / be able to (能力・許可・可能)</button>
+        <button onclick="filterGrammar('may')" class="g-filter-btn bg-white text-gray-700 hover:bg-gray-100 px-4 py-2 rounded-xl text-sm font-bold border border-gray-200">② may / might / can't (推量・可能性)</button>
+        <button onclick="filterGrammar('past')" class="g-filter-btn bg-white text-gray-700 hover:bg-gray-100 px-4 py-2 rounded-xl text-sm font-bold border border-gray-200">③ 助動詞＋have＋過去分詞 (過去の推量・後悔)</button>
+        <button onclick="filterGrammar('must')" class="g-filter-btn bg-white text-gray-700 hover:bg-gray-100 px-4 py-2 rounded-xl text-sm font-bold border border-gray-200">④ must / have to / should / would (義務・習慣)</button>
+      </div>
+
+      <!-- Grammar Section Content -->
+      <div id="grammar-container" class="grid gap-6">
+        <!-- Dynamic Insertion or Static Sections -->
+
+        <!-- Section 1: can / be able to -->
+        <div class="grammar-card g-can bg-white rounded-3xl p-6 shadow-md border-l-8 border-brand-teal space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="bg-teal-100 text-teal-800 text-xs px-3 py-1 rounded-full font-bold">基本文法 A</span>
+            <span class="text-xs text-gray-400 font-bold">Slide 6-12</span>
+          </div>
+          <h3 class="text-xl font-bold text-brand-blue flex items-center gap-2">
+            <i class="fa-solid fa-circle-check text-brand-teal"></i> can / be able to（〜できる・可能・許可）
+          </h3>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            「〜することができる」という能力や「〜してもよい」という許可を表します。<br>
+            <span class="font-bold text-brand-teal">【ポイント】</span> 過去形で「実際に〜することができた」という達成の事実に触れるときは <code class="bg-gray-100 text-pink-600 px-1.5 py-0.5 rounded font-bold">was/were able to</code> を使います（couldは単に能力があったこと）。未来の可能は <code class="bg-gray-100 text-pink-600 px-1.5 py-0.5 rounded font-bold">will be able to</code> にします（× will can はNG）。
+          </p>
+
+          <div class="bg-teal-50 rounded-2xl p-4 space-y-3 border border-teal-100">
+            <h4 class="text-xs font-bold text-teal-800 uppercase tracking-wider">例文で学ぼう（スピーカーを押して音声を聞こう！）</h4>
+            
+            <div class="grammar-sentence-item bg-white p-3 rounded-xl flex items-center justify-between shadow-sm">
+              <div>
+                <p class="font-bold text-brand-blue">He can play the guitar.</p>
+                <p class="text-xs text-gray-500">彼はギターを弾くことができます。（現在の能力）</p>
+              </div>
+              <button onclick="playTTS('He can play the guitar.')" class="w-10 h-10 bg-brand-teal text-white rounded-xl flex items-center justify-center hover:scale-105 transition shadow">
+                <i class="fa-solid fa-volume-high"></i>
+              </button>
+            </div>
+
+            <div class="grammar-sentence-item bg-white p-3 rounded-xl flex items-center justify-between shadow-sm">
+              <div>
+                <p class="font-bold text-brand-blue">Are you able to come again tomorrow?</p>
+                <p class="text-xs text-gray-500">あなたは明日もう一度来ることができますか？（可能の尋ね）</p>
+              </div>
+              <button onclick="playTTS('Are you able to come again tomorrow?')" class="w-10 h-10 bg-brand-teal text-white rounded-xl flex items-center justify-center hover:scale-105 transition shadow">
+                <i class="fa-solid fa-volume-high"></i>
+              </button>
+            </div>
+
+            <div class="grammar-sentence-item bg-white p-3 rounded-xl flex items-center justify-between shadow-sm">
+              <div>
+                <p class="font-bold text-brand-blue">I was able to catch the last train because I ran hard.</p>
+                <p class="text-xs text-gray-500">一生懸命走ったので、最終電車に乗ることができた。（実際に達成！）</p>
+              </div>
+              <button onclick="playTTS('I was able to catch the last train because I ran hard.')" class="w-10 h-10 bg-brand-teal text-white rounded-xl flex items-center justify-center hover:scale-105 transition shadow">
+                <i class="fa-solid fa-volume-high"></i>
+              </button>
+            </div>
+
+            <div class="grammar-sentence-item bg-white p-3 rounded-xl flex items-center justify-between shadow-sm">
+              <div>
+                <p class="font-bold text-brand-blue">John will be able to speak Japanese soon.</p>
+                <p class="text-xs text-gray-500">ジョンはすぐに日本語を話せるようになるでしょう。（未来の可能）</p>
+              </div>
+              <button onclick="playTTS('John will be able to speak Japanese soon.')" class="w-10 h-10 bg-brand-teal text-white rounded-xl flex items-center justify-center hover:scale-105 transition shadow">
+                <i class="fa-solid fa-volume-high"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: may / might / can't -->
+        <div class="grammar-card g-may bg-white rounded-3xl p-6 shadow-md border-l-8 border-brand-purple space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full font-bold">基本文法 B</span>
+            <span class="text-xs text-gray-400 font-bold">Slide 24-35</span>
+          </div>
+          <h3 class="text-xl font-bold text-brand-blue flex items-center gap-2">
+            <i class="fa-solid fa-question text-brand-purple"></i> may / might / can't（〜かもしれない / 〜のはずがない）
+          </h3>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            現在の推量（予想）や許可を表します。<br>
+            • <code class="bg-gray-100 text-purple-600 px-1 py-0.5 rounded font-bold">may / might</code> ：「〜かもしれない」（mightのほうが自信が控えめ）<br>
+            • <code class="bg-gray-100 text-purple-600 px-1 py-0.5 rounded font-bold">can't</code> ：「〜のはずがない」（強い否定の確信）<br>
+            • <code class="bg-gray-100 text-purple-600 px-1 py-0.5 rounded font-bold">May I ...?</code> ：「〜してもよろしいですか？」（丁寧な許可のお願い）
+          </p>
+
+          <div class="bg-purple-50 rounded-2xl p-4 space-y-3 border border-purple-100">
+            <h4 class="text-xs font-bold text-purple-800 uppercase tracking-wider">例文で学ぼう</h4>
+            
+            <div class="grammar-sentence-item bg-white p-3 rounded-xl flex items-center justify-between shadow-sm">
+              <div>
+                <p class="font-bold text-brand-blue">Her story may be true.</p>
+                <p class="text-xs text-gray-500">彼女の話は本当かもしれない。（推量）</p>
+              </div>
+              <button onclick="playTTS('Her story may be true.')" class="w-10 h-10 bg-brand-purple text-white rounded-xl flex items-center justify-center hover:scale-105 transition shadow">
+                <i class="fa-solid fa-volume-high"></i>
+              </button>
+            </div>
+
+            <div class="grammar-sentence-item bg-white p-3 rounded-xl flex items-center justify-between shadow-sm">
+              <div>
+                <p class="font-bold text-brand-blue">He can't be serious.</p>
+                <p class="text-xs text-gray-500">彼が本気（冗談じゃない）のはずがない！（強い否定推量）</p>
+              </div>
+              <button onclick="playTTS('He can\'t be serious.')" class="w-10 h-10 bg-brand-purple text-white rounded-xl flex items-center justify-center hover:scale-105 transition shadow">
+                <i class="fa-solid fa-volume-high"></i>
+              </button>
+            </div>
+
+            <div class="grammar-sentence-item bg-white p-3 rounded-xl flex items-center justify-between shadow-sm">
+              <div>
+                <p class="font-bold text-brand-blue">May I borrow this recipe book?</p>
+                <p class="text-xs text-gray-500">このレシピ本をお借りしてもよろしいですか？（丁寧な許可）</p>
+              </div>
+              <button onclick="playTTS('May I borrow this recipe book?')" class="w-10 h-10 bg-brand-purple text-white rounded-xl flex items-center justify-center hover:scale-105 transition shadow">
+                <i class="fa-solid fa-volume-high"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: 助動詞＋have＋過去分詞 -->
+        <div class="grammar-card g-past bg-white rounded-3xl p-6 shadow-md border-l-8 border-brand-pink space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="bg-pink-100 text-pink-800 text-xs px-3 py-1 rounded-full font-bold">応用文法 C</span>
+            <span class="text-xs text-gray-400 font-bold">Slide 36-40, 52-54</span>
+          </div>
+          <h3 class="text-xl font-bold text-brand-blue flex items-center gap-2">
+            <i class="fa-solid fa-clock-rotate-left text-brand-pink"></i> 助動詞 ＋ have ＋ 過去分詞（過去の推量・後悔）
+          </h3>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            昔のこと（過去）について、「〜だったかもしれない」「〜だったはずがない」「〜すべきだったのに」と振り返る重要表現！<br>
+            • <code class="bg-gray-100 text-pink-600 px-1 py-0.5 rounded font-bold">may [might] have p.p.</code> ：〜だったかもしれない<br>
+            • <code class="bg-gray-100 text-pink-600 px-1 py-0.5 rounded font-bold">can't [couldn't] have p.p.</code> ：〜だったはずがない<br>
+            • <code class="bg-gray-100 text-pink-600 px-1 py-0.5 rounded font-bold">must have p.p.</code> ：〜だったに違いない<br>
+            • <code class="bg-gray-100 text-pink-600 px-1 py-0.5 rounded font-bold">should have p.p.</code> ：〜すべきだった（のにしなかった…反省・後悔）
+          </p>
+
+          <div class="bg-pink-50 rounded-2xl p-4 space-y-3 border border-pink-100">
+            <h4 class="text-xs font-bold text-pink-800 uppercase tracking-wider">例文で学ぼう</h4>
+
+            <div class="grammar-sentence-item bg-white p-3 rounded-xl flex items-center justify-between shadow-sm">
+              <div>
+                <p class="font-bold text-brand-blue">It may have rained last night.</p>
+                <p class="text-xs text-gray-500">昨夜、雨が降ったのかもしれない。（過去の推量）</p>
+              </div>
+              <button onclick="playTTS('It may have rained last night.')" class="w-10 h-10 bg-brand-pink text-white rounded-xl flex items-center justify-center hover:scale-105 transition shadow">
+                <i class="fa-solid fa-volume-high"></i>
+              </button>
+            </div>
+
+            <div class="grammar-sentence-item bg-white p-3 rounded-xl flex items-center justify-between shadow-sm">
+              <div>
+                <p class="font-bold text-brand-blue">He cannot have forgotten my birthday.</p>
+                <p class="text-xs text-gray-500">彼が私の誕生日を忘れたはずがない。（過去の否定の確信）</p>
+              </div>
+              <button onclick="playTTS('He cannot have forgotten my birthday.')" class="w-10 h-10 bg-brand-pink text-white rounded-xl flex items-center justify-center hover:scale-105 transition shadow">
+                <i class="fa-solid fa-volume-high"></i>
+              </button>
+            </div>
+
+            <div class="grammar-sentence-item bg-white p-3 rounded-xl flex items-center justify-between shadow-sm">
+              <div>
+                <p class="font-bold text-brand-blue">You should have cleaned your room.</p>
+                <p class="text-xs text-gray-500">あなたは部屋を掃除しておくべきだったのに。（過去の後悔・アドバイス）</p>
+              </div>
+              <button onclick="playTTS('You should have cleaned your room.')" class="w-10 h-10 bg-brand-pink text-white rounded-xl flex items-center justify-center hover:scale-105 transition shadow">
+                <i class="fa-solid fa-volume-high"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4: must / should / would -->
+        <div class="grammar-card g-must bg-white rounded-3xl p-6 shadow-md border-l-8 border-brand-yellow space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full font-bold">応用文法 D</span>
+            <span class="text-xs text-gray-400 font-bold">Slide 42-51</span>
+          </div>
+          <h3 class="text-xl font-bold text-brand-blue flex items-center gap-2">
+            <i class="fa-solid fa-shield-halved text-amber-500"></i> must / have to / should / would（義務・助言・習慣）
+          </h3>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            • <code class="bg-gray-100 text-amber-600 px-1 py-0.5 rounded font-bold">must / have to</code> ：〜しなければならない（義務）<br>
+            • <code class="bg-gray-100 text-amber-600 px-1 py-0.5 rounded font-bold">don't have to</code> ：〜しなくてよい（不要）※must notは「禁止：〜してはダメ」<br>
+            • <code class="bg-gray-100 text-amber-600 px-1 py-0.5 rounded font-bold">should / had better</code> ：〜した方がいい（助言・アドバイス）<br>
+            • <code class="bg-gray-100 text-amber-600 px-1 py-0.5 rounded font-bold">would often</code> / <code class="bg-gray-100 text-amber-600 px-1 py-0.5 rounded font-bold">used to</code> ：昔よく〜したものだ（過去の習慣）<br>
+            • <code class="bg-gray-100 text-amber-600 px-1 py-0.5 rounded font-bold">wouldn't</code> ：どうしても〜しようとしなかった（過去の強い拒絶）
+          </p>
+
+          <div class="bg-amber-50 rounded-2xl p-4 space-y-3 border border-amber-100">
+            <h4 class="text-xs font-bold text-amber-800 uppercase tracking-wider">例文で学ぼう</h4>
+
+            <div class="grammar-sentence-item bg-white p-3 rounded-xl flex items-center justify-between shadow-sm">
+              <div>
+                <p class="font-bold text-brand-blue">You must do your homework.</p>
+                <p class="text-xs text-gray-500">あなたは宿題をしなければならない。（義務）</p>
+              </div>
+              <button onclick="playTTS('You must do your homework.')" class="w-10 h-10 bg-amber-400 text-white rounded-xl flex items-center justify-center hover:scale-105 transition shadow">
+                <i class="fa-solid fa-volume-high"></i>
+              </button>
+            </div>
+
+            <div class="grammar-sentence-item bg-white p-3 rounded-xl flex items-center justify-between shadow-sm">
+              <div>
+                <p class="font-bold text-brand-blue">The door wouldn't open.</p>
+                <p class="text-xs text-gray-500">ドアはどうしても開かなかった。（過去の拒絶）</p>
+              </div>
+              <button onclick="playTTS('The door wouldn\'t open.')" class="w-10 h-10 bg-amber-400 text-white rounded-xl flex items-center justify-center hover:scale-105 transition shadow">
+                <i class="fa-solid fa-volume-high"></i>
+              </button>
+            </div>
+
+            <div class="grammar-sentence-item bg-white p-3 rounded-xl flex items-center justify-between shadow-sm">
+              <div>
+                <p class="font-bold text-brand-blue">I would often swim at this beach when I was a child.</p>
+                <p class="text-xs text-gray-500">子供のころ、よくこのビーチで泳いだものだ。（過去の思い出・習慣）</p>
+              </div>
+              <button onclick="playTTS('I would often swim at this beach when I was a child.')" class="w-10 h-10 bg-amber-400 text-white rounded-xl flex items-center justify-center hover:scale-105 transition shadow">
+                <i class="fa-solid fa-volume-high"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== TAB 2: PROBLEM SOLVING (問題演習) ==================== -->
+    <section id="tab-practice" class="tab-content hidden space-y-6">
+      
+      <!-- Quiz Header & Category Sub-tabs -->
+      <div class="bg-white rounded-3xl p-6 shadow-md space-y-4">
+        <div class="flex flex-wrap justify-between items-center gap-2">
+          <div>
+            <h2 class="text-2xl font-bold text-brand-blue">✍️ 助動詞マスター問題演習</h2>
+            <p class="text-xs text-gray-500">かっこに当てはまる正しい語を選び、「解答確認」を押そう！</p>
+          </div>
+          <div id="self-score-badge" class="hidden bg-emerald-100 text-emerald-700 px-4 py-2 rounded-2xl font-bold text-sm flex items-center gap-2">
+            <i class="fa-solid fa-trophy text-amber-500"></i> 得点: <span id="current-score-val">0</span> / <span id="total-score-val">0</span>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-2 border-t border-gray-100 pt-3">
+          <button onclick="switchQuizCategory('q-can')" id="qcat-can" class="qcat-btn active bg-brand-teal text-white px-4 py-2 rounded-xl text-xs sm:text-sm font-bold shadow-sm">
+            Set 1: can / be able to
+          </button>
+          <button onclick="switchQuizCategory('q-may')" id="qcat-may" class="qcat-btn bg-gray-100 text-gray-600 hover:bg-gray-200 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold">
+            Set 2: may / might / can't
+          </button>
+          <button onclick="switchQuizCategory('q-past')" id="qcat-past" class="qcat-btn bg-gray-100 text-gray-600 hover:bg-gray-200 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold">
+            Set 3: 助動詞＋have＋p.p.
+          </button>
+          <button onclick="switchQuizCategory('q-must')" id="qcat-must" class="qcat-btn bg-gray-100 text-gray-600 hover:bg-gray-200 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold">
+            Set 4: 義務・アドバイス・習慣
+          </button>
+        </div>
+      </div>
+
+      <!-- Quiz Questions Container -->
+      <div id="quiz-container" class="space-y-4">
+        <!-- Rendered dynamically via JS -->
+      </div>
+
+      <!-- Self Scoring & Completion Action Card -->
+      <div class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-3xl p-6 text-white shadow-lg text-center space-y-4">
+        <h3 class="text-xl font-bold">🎯 解答が終わったら「自己採点」ボタンを押して点数を確認しよう！</h3>
+        <p class="text-xs text-indigo-100">何度もチャレンジして全問正解（満点）を目指そうね！</p>
+        <button onclick="calculateSelfScore()" class="bg-brand-yellow text-gray-900 font-extrabold text-lg px-8 py-3 rounded-2xl hover:scale-105 transition shadow-xl inline-flex items-center gap-2">
+          <i class="fa-solid fa-square-check text-brand-pink"></i> 自己採点する（スコア確認）
+        </button>
+      </div>
+
+      <!-- Self Scoring Result Modal -->
+      <div id="score-modal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl p-6 md:p-8 max-w-md w-full text-center space-y-5 animate-bounce-in shadow-2xl">
+          <div id="score-icon" class="text-6xl text-brand-yellow">
+            <i class="fa-solid fa-crown"></i>
+          </div>
+          <h3 id="score-title" class="text-2xl font-black text-brand-blue">すばらしい！結果発表</h3>
+          
+          <div class="bg-teal-50 rounded-2xl p-4 border border-teal-100">
+            <p class="text-sm text-gray-500 font-bold">あなたの得点</p>
+            <p class="text-4xl font-extrabold text-brand-teal my-1"><span id="modal-score">0</span> / <span id="modal-total">0</span> 点</p>
+            <p id="score-feedback" class="text-xs text-gray-600 font-medium">満点おめでとう！助動詞マスターだね！</p>
+          </div>
+
+          <button onclick="closeScoreModal()" class="w-full bg-brand-teal text-white font-bold py-3 rounded-xl hover:opacity-90 transition shadow">
+            とじる＆もう一度練習する
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ==================== TAB 3: VERB BANK (動詞バンク) ==================== -->
+    <section id="tab-verbs" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-3xl p-6 shadow-md space-y-4">
+        <div class="flex flex-wrap justify-between items-center gap-4">
+          <div>
+            <h2 class="text-2xl font-bold text-brand-blue flex items-center gap-2">
+              <i class="fa-solid fa-bolt text-brand-yellow"></i> 動詞バンク (Verb Bank)
+            </h2>
+            <p class="text-xs text-gray-500">パワポに登場した重要な動詞とコロケーション（熟語）集</p>
+          </div>
+          <div class="w-full sm:w-64 relative">
+            <input type="text" id="verb-search" oninput="renderVerbs()" placeholder="検索 (例: cook, 焼く)..." class="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-teal">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-gray-400 text-xs"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Verb Cards Grid -->
+      <div id="verb-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Dynamic Insertion -->
+      </div>
+    </section>
+
+    <!-- ==================== TAB 4: NOUN BANK (名詞バンク) ==================== -->
+    <section id="tab-nouns" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-3xl p-6 shadow-md space-y-4">
+        <div class="flex flex-wrap justify-between items-center gap-4">
+          <div>
+            <h2 class="text-2xl font-bold text-brand-blue flex items-center gap-2">
+              <i class="fa-solid fa-apple-whole text-brand-pink"></i> 名詞バンク (Noun Bank)
+            </h2>
+            <p class="text-xs text-gray-500">パワポに登場した大切な名詞と単語の意味一覧</p>
+          </div>
+          <div class="w-full sm:w-64 relative">
+            <input type="text" id="noun-search" oninput="renderNouns()" placeholder="検索 (例: recipe, 料理)..." class="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-pink">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-gray-400 text-xs"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Noun Cards Grid -->
+      <div id="noun-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Dynamic Insertion -->
+      </div>
+    </section>
+
+    <!-- ==================== TAB 5: FLASHCARDS (フラッシュカード) ==================== -->
+    <section id="tab-flashcard" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-3xl p-6 shadow-md text-center max-w-2xl mx-auto space-y-4">
+        <h2 class="text-2xl font-bold text-brand-blue">🗂 フラッシュ暗記学習</h2>
+        <p class="text-xs text-gray-500">カードをタップして裏返し！「発音を聞く」ボタンで英語音声が流れます。</p>
+        
+        <div class="flex justify-center gap-2 text-xs font-bold">
+          <button onclick="setFlashDeck('all')" class="flash-deck-btn active bg-brand-purple text-white px-3 py-1.5 rounded-lg">全部</button>
+          <button onclick="setFlashDeck('aux')" class="flash-deck-btn bg-gray-100 text-gray-600 px-3 py-1.5 rounded-lg">助動詞フレーズ</button>
+          <button onclick="setFlashDeck('vocab')" class="flash-deck-btn bg-gray-100 text-gray-600 px-3 py-1.5 rounded-lg">重要英単語</button>
+        </div>
+      </div>
+
+      <!-- Flashcard Interactive Component -->
+      <div class="max-w-md mx-auto space-y-4">
+        <div id="flashcard-el" onclick="flipCard()" class="card-flip w-full h-64 cursor-pointer">
+          <div class="card-inner w-full h-full relative rounded-3xl shadow-xl transition-transform duration-500">
+            <!-- Front -->
+            <div class="card-front absolute inset-0 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-3xl p-6 text-white flex flex-col justify-between items-center text-center">
+              <span class="text-xs bg-white/20 px-3 py-1 rounded-full font-bold">タップで日本語を表示 🔄</span>
+              <div class="space-y-2">
+                <p id="fc-english" class="text-2xl md:text-3xl font-extrabold tracking-wide">He can play the guitar.</p>
+                <p id="fc-category" class="text-xs text-cyan-100 font-semibold">[ 助動詞 : can ]</p>
+              </div>
+              <p class="text-xs opacity-75">Click / Tap to Flip</p>
+            </div>
+            <!-- Back -->
+            <div class="card-back absolute inset-0 bg-gradient-to-br from-pink-400 to-rose-500 rounded-3xl p-6 text-white flex flex-col justify-between items-center text-center">
+              <span class="text-xs bg-white/20 px-3 py-1 rounded-full font-bold">日本語の意味 💡</span>
+              <div class="space-y-2">
+                <p id="fc-japanese" class="text-xl md:text-2xl font-bold">彼はギターを弾くことができる。</p>
+                <p id="fc-note" class="text-xs text-pink-100">※現在の「能力」を表すcan</p>
+              </div>
+              <p class="text-xs opacity-75">Click / Tap to Flip Back</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="flex items-center justify-between px-2">
+          <button onclick="prevCard()" class="bg-white text-gray-700 w-12 h-12 rounded-2xl shadow hover:bg-gray-50 flex items-center justify-center font-bold">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          
+          <button onclick="playFlashcardAudio(event)" class="bg-brand-yellow text-gray-900 font-bold px-5 py-3 rounded-2xl shadow hover:scale-105 transition flex items-center gap-2">
+            <i class="fa-solid fa-volume-high text-brand-pink text-lg"></i> 発音を聞く
+          </button>
+
+          <button onclick="nextCard()" class="bg-white text-gray-700 w-12 h-12 rounded-2xl shadow hover:bg-gray-50 flex items-center justify-center font-bold">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+
+        <div class="text-center">
+          <span id="fc-progress" class="text-xs font-bold text-gray-400">Card 1 / 15</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-gray-200 mt-12 py-6 text-center text-xs text-gray-400">
+    <p>論理・表現I L6 助動詞 学習アプリケーション | High School English Learning Companion</p>
+  </footer>
+
+  <!-- APP JAVASCRIPT LOGIC -->
+  <script>
+    // Speech Synthesis Helper (Web Speech API)
+    function playTTS(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel(); // stop active audio
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.9; // clear rate for 14-16 yrs
+        window.speechSynthesis.speak(utterance);
+      } else {
+        alert('お使いのブラウザは音声読み上げに対応していません。');
+      }
+    }
+
+    // ---------------- TAB NAVIGATION ----------------
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('bg-brand-teal', 'text-white', 'shadow-md');
+        btn.classList.add('text-gray-600');
+      });
+
+      document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+      const activeBtn = document.getElementById(`nav-${tabId}`);
+      activeBtn.classList.add('bg-brand-teal', 'text-white', 'shadow-md');
+      activeBtn.classList.remove('text-gray-600');
+    }
+
+    // ---------------- GRAMMAR FILTER ----------------
+    function filterGrammar(cat) {
+      document.querySelectorAll('.g-filter-btn').forEach(b => {
+        b.classList.remove('bg-brand-purple', 'text-white');
+        b.classList.add('bg-white', 'text-gray-700');
+      });
+      event.target.classList.add('bg-brand-purple', 'text-white');
+
+      const cards = document.querySelectorAll('.grammar-card');
+      cards.forEach(card => {
+        if (cat === 'all') {
+          card.classList.remove('hidden');
+        } else {
+          if (card.classList.contains(`g-${cat}`)) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        }
+      });
+    }
+
+    // ---------------- QUIZ DATA & LOGIC ----------------
+    const quizData = {
+      'q-can': [
+        {
+          id: 'q1',
+          question: '（1）ペンギンは上手に泳ぐことができるが、空を飛ぶことはできない。',
+          sentence: 'Penguins ( 1 ) swim well, but they ( 2 ) fly.',
+          options: ['can / can\'t', 'are able to / can', 'could / could'],
+          answer: 0,
+          explanation: '「〜できる」は can、「できない」は can\'t です。',
+          tts: 'Penguins can swim well, but they can\'t fly.'
+        },
+        {
+          id: 'q2',
+          question: '（2）私たちは図書館で一度に3冊本を借りることができる。',
+          sentence: 'We ( 1 ) three books at a time from the library.',
+          options: ['can borrow', 'are able', 'could borrowed'],
+          answer: 0,
+          explanation: '助動詞 can の後ろは動詞の原形 (borrow) が来ます。',
+          tts: 'We can borrow three books at a time from the library.'
+        },
+        {
+          id: 'q3',
+          question: '（3）一生懸命走ったので、最終電車に乗ることができた。（実際の達成）',
+          sentence: 'I ( 1 ) catch the last train because I ran hard.',
+          options: ['was able to', 'could to', 'can'],
+          answer: 0,
+          explanation: '過去に困難を乗り越えて「実際に〜できた」ときは was able to を使います。',
+          tts: 'I was able to catch the last train because I ran hard.'
+        },
+        {
+          id: 'q4',
+          question: '（4）ジョンはすぐに日本語を話せるようになるだろう。（未来の可能）',
+          sentence: 'John ( 1 ) speak Japanese soon.',
+          options: ['will be able to', 'will can', 'is able to'],
+          answer: 0,
+          explanation: '未来の「〜できるようになる」は will be able to です（will can は英語で使えません）。',
+          tts: 'John will be able to speak Japanese soon.'
+        }
+      ],
+      'q-may': [
+        {
+          id: 'q5',
+          question: '（1）彼女の話は本当かもしれない。',
+          sentence: 'Her story ( 1 ) true.',
+          options: ['may be', 'can\'t be', 'must to be'],
+          answer: 0,
+          explanation: '「〜かもしれない」という推量は may be を使います。',
+          tts: 'Her story may be true.'
+        },
+        {
+          id: 'q6',
+          question: '（2）彼が本気（真剣）のはずがない！',
+          sentence: 'He ( 1 ) serious.',
+          options: ['can\'t be', 'may not', 'could be'],
+          answer: 0,
+          explanation: '「〜のはずがない」という強い否定の推量は can\'t be を使います。',
+          tts: 'He can\'t be serious.'
+        },
+        {
+          id: 'q7',
+          question: '（3）このレシピ本をお借りしてもよろしいですか？（丁寧な許可）',
+          sentence: '( 1 ) borrow this recipe book?',
+          options: ['May I', 'Must I', 'Am I'],
+          answer: 0,
+          explanation: '「〜してもよろしいですか」と丁寧に許可を求めるときは May I ...? を使います。',
+          tts: 'May I borrow this recipe book?'
+        }
+      ],
+      'q-past': [
+        {
+          id: 'q8',
+          question: '（1）昨夜、雨が降ったのかもしれない。（過去の推量）',
+          sentence: 'It ( 1 ) rained last night.',
+          options: ['may have', 'can have', 'must to'],
+          answer: 0,
+          explanation: '「過去に〜だったかもしれない」は may [might] have + 過去分詞 です。',
+          tts: 'It may have rained last night.'
+        },
+        {
+          id: 'q9',
+          question: '（2）彼が私の誕生日を忘れたはずがない。（過去の否定の確信）',
+          sentence: 'He ( 1 ) forgotten my birthday.',
+          options: ['cannot have', 'may have not', 'should not'],
+          answer: 0,
+          explanation: '「過去に〜だったはずがない」は cannot [can\'t] have + 過去分詞 です。',
+          tts: 'He cannot have forgotten my birthday.'
+        },
+        {
+          id: 'q10',
+          question: '（3）あなたは自分の部屋を掃除しておくべきだったのに。（反省・後悔）',
+          sentence: 'You ( 1 ) cleaned your room.',
+          options: ['should have', 'must have', 'could has'],
+          answer: 0,
+          explanation: '「〜すべきだったのに（しなかった）」という後悔は should have + 過去分詞 です。',
+          tts: 'You should have cleaned your room.'
+        }
+      ],
+      'q-must': [
+        {
+          id: 'q11',
+          question: '（1）あなたは宿題をしなければならない。',
+          sentence: 'You ( 1 ) do your homework.',
+          options: ['must', 'may', 'would'],
+          answer: 0,
+          explanation: '「〜しなければならない」という強い義務は must や have to です。',
+          tts: 'You must do your homework.'
+        },
+        {
+          id: 'q12',
+          question: '（2）特別な宿題をする必要はありません。（不要）',
+          sentence: 'You ( 1 ) do special homework.',
+          options: ['don\'t have to', 'must not', 'should not'],
+          answer: 0,
+          explanation: '「〜する必要はない」は don\'t have to です（must not は「〜してはいけない」という禁止）。',
+          tts: 'You don\'t have to do special homework.'
+        },
+        {
+          id: 'q13',
+          question: '（3）ドアはどうしても開かなかった。（過去の拒絶）',
+          sentence: 'The door ( 1 ) open.',
+          options: ['wouldn\'t', 'shouldn\'t', 'mustn\'t'],
+          answer: 0,
+          explanation: '「どうしても〜しようとしなかった」という過去の拒絶は wouldn\'t を使います。',
+          tts: 'The door wouldn\'t open.'
+        },
+        {
+          id: 'q14',
+          question: '（4）子供の頃、よくこの海岸で泳いだものだ。（過去の習慣）',
+          sentence: 'I ( 1 ) swim at this beach when I was a child.',
+          options: ['would often', 'must often', 'should'],
+          answer: 0,
+          explanation: '「よく〜したものだ」という過去の思い出・習慣は would often です。',
+          tts: 'I would often swim at this beach when I was a child.'
+        }
+      ]
+    };
+
+    let activeQuizCategory = 'q-can';
+    let userAnswers = {};
+
+    function switchQuizCategory(catKey) {
+      activeQuizCategory = catKey;
+      document.querySelectorAll('.qcat-btn').forEach(b => {
+        b.classList.remove('bg-brand-teal', 'text-white', 'shadow-md');
+        b.classList.add('bg-gray-100', 'text-gray-600');
+      });
+      const btn = document.getElementById(`qcat-${catKey.replace('q-', '')}`);
+      if (btn) {
+        btn.classList.add('bg-brand-teal', 'text-white', 'shadow-md');
+        btn.classList.remove('bg-gray-100', 'text-gray-600');
+      }
+      renderQuiz();
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      const questions = quizData[activeQuizCategory] || [];
+      
+      container.innerHTML = questions.map((q, index) => {
+        const savedAns = userAnswers[q.id];
+        return `
+          <div class="bg-white rounded-3xl p-5 md:p-6 shadow-md border border-gray-100 space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="bg-teal-100 text-teal-800 text-xs px-3 py-1 rounded-full font-bold">問題 ${index + 1}</span>
+              <button onclick="playTTS('${q.tts.replace(/'/g, "\\'")}')" class="text-xs bg-gray-100 text-gray-700 hover:bg-brand-yellow px-3 py-1.5 rounded-xl font-bold flex items-center gap-1 transition">
+                <i class="fa-solid fa-volume-high text-brand-pink"></i> 英文を聞く
+              </button>
+            </div>
+
+            <p class="font-bold text-gray-800 text-sm md:text-base">${q.question}</p>
+            <p class="text-brand-blue font-extrabold text-base md:text-lg bg-blue-50 p-3 rounded-2xl border border-blue-100">${q.sentence}</p>
+
+            <!-- Options -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              ${q.options.map((opt, oIdx) => `
+                <button onclick="selectAnswer('${q.id}', ${oIdx})" id="opt-${q.id}-${oIdx}" class="quiz-opt-btn border-2 ${savedAns === oIdx ? 'border-brand-teal bg-teal-50 font-bold text-teal-900' : 'border-gray-200 bg-white hover:bg-gray-50'} py-2.5 px-4 rounded-xl text-sm font-semibold transition text-center">
+                  ${opt}
+                </button>
+              `).join('')}
+            </div>
+
+            <!-- Action & Answer Check -->
+            <div class="pt-2 flex flex-wrap items-center justify-between gap-2 border-t border-gray-100">
+              <button onclick="checkAnswer('${q.id}')" class="bg-brand-pink text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl hover:opacity-90 shadow transition flex items-center gap-1.5">
+                <i class="fa-solid fa-circle-check"></i> 解答確認
+              </button>
+              <div id="feedback-${q.id}" class="hidden text-xs md:text-sm font-bold"></div>
+            </div>
+
+            <!-- Explanation Box -->
+            <div id="explain-${q.id}" class="hidden bg-amber-50 border border-amber-200 p-3.5 rounded-2xl text-xs md:text-sm text-amber-900 leading-relaxed">
+              💡 <strong>解説:</strong> ${q.explanation}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function selectAnswer(qId, optionIdx) {
+      userAnswers[qId] = optionIdx;
+      // Refresh options UI
+      const qList = quizData[activeQuizCategory];
+      const q = qList.find(item => item.id === qId);
+      q.options.forEach((_, idx) => {
+        const btn = document.getElementById(`opt-${qId}-${idx}`);
+        if (btn) {
+          if (idx === optionIdx) {
+            btn.className = "quiz-opt-btn border-2 border-brand-teal bg-teal-50 font-bold text-teal-900 py-2.5 px-4 rounded-xl text-sm font-semibold transition text-center";
+          } else {
+            btn.className = "quiz-opt-btn border-2 border-gray-200 bg-white hover:bg-gray-50 py-2.5 px-4 rounded-xl text-sm font-semibold transition text-center";
+          }
+        }
+      });
+    }
+
+    function checkAnswer(qId) {
+      const questions = quizData[activeQuizCategory];
+      const q = questions.find(item => item.id === qId);
+      const userAns = userAnswers[qId];
+      const feedbackEl = document.getElementById(`feedback-${qId}`);
+      const explainEl = document.getElementById(`explain-${qId}`);
+
+      if (userAns === undefined) {
+        feedbackEl.className = "text-xs md:text-sm font-bold text-amber-600";
+        feedbackEl.innerHTML = '⚠️ 選択肢を選んでから「解答確認」を押してね！';
+        feedbackEl.classList.remove('hidden');
+        return;
+      }
+
+      if (userAns === q.answer) {
+        feedbackEl.className = "text-xs md:text-sm font-extrabold text-emerald-600 flex items-center gap-1";
+        feedbackEl.innerHTML = '<i class="fa-solid fa-circle-check text-lg"></i> 正解！ Excellent! 🎉';
+      } else {
+        feedbackEl.className = "text-xs md:text-sm font-extrabold text-rose-500 flex items-center gap-1";
+        feedbackEl.innerHTML = `<i class="fa-solid fa-circle-xmark text-lg"></i> 残念！正解は「${q.options[q.answer]}」だよ！`;
+      }
+
+      feedbackEl.classList.remove('hidden');
+      explainEl.classList.remove('hidden');
+    }
+
+    // Self Scoring
+    function calculateSelfScore() {
+      const allQuestions = Object.values(quizData).flat();
+      let total = allQuestions.length;
+      let score = 0;
+
+      allQuestions.forEach(q => {
+        if (userAnswers[q.id] === q.answer) {
+          score++;
+        }
+      });
+
+      document.getElementById('modal-score').textContent = score;
+      document.getElementById('modal-total').textContent = total;
+
+      const scoreBadge = document.getElementById('self-score-badge');
+      document.getElementById('current-score-val').textContent = score;
+      document.getElementById('total-score-val').textContent = total;
+      scoreBadge.classList.remove('hidden');
+
+      const feedback = document.getElementById('score-feedback');
+      const icon = document.getElementById('score-icon');
+
+      const percentage = (score / total) * 100;
+
+      if (percentage === 100) {
+        icon.innerHTML = '<i class="fa-solid fa-trophy text-amber-400"></i>';
+        feedback.textContent = '🎉 素晴らしい！全問正解！完璧な助動詞マスターだね！';
+      } else if (percentage >= 70) {
+        icon.innerHTML = '<i class="fa-solid fa-medal text-brand-teal"></i>';
+        feedback.textContent = '👍 お見事！かなり理解できているよ！間違えた問題を復習しよう！';
+      } else {
+        icon.innerHTML = '<i class="fa-solid fa-seedling text-emerald-500"></i>';
+        feedback.textContent = '💪 あと少し！「文法ノート」を見返してもう一度チャレンジしよう！';
+      }
+
+      document.getElementById('score-modal').classList.remove('hidden');
+    }
+
+    function closeScoreModal() {
+      document.getElementById('score-modal').classList.add('hidden');
+    }
+
+    // ---------------- VERB BANK DATA ----------------
+    const verbData = [
+      { en: "cook in a microwave", jp: "電子レンジで調理する", col: "cook food in a microwave oven", ex: "You can cook in a microwave." },
+      { en: "stew meat", jp: "肉を煮込む", col: "stew meat in a pot", ex: "She was able to stew meat." },
+      { en: "grill fish", jp: "魚を焼く", col: "grill fish / chicken", ex: "He could grill fish well." },
+      { en: "bake cookies", jp: "クッキーを焼く", col: "bake a cake / cookies", ex: "I can't bake a meat pie." },
+      { en: "chop vegetables", jp: "野菜を刻む", col: "chop vegetables into pieces", ex: "You were able to chop vegetables." },
+      { en: "boil an egg", jp: "卵をゆでる", col: "boil an egg / water", ex: "We are able to boil eggs." },
+      { en: "tell the difference", jp: "違いがわかる・見分ける", col: "tell the difference between A and B", ex: "I was not able to tell the difference." },
+      { en: "depend on", jp: "〜に頼る・依存する", col: "depend on someone for something", ex: "We can't depend on him for everything." },
+      { en: "lift", jp: "持ち上げる", col: "lift 30 kilograms with one hand", ex: "I could lift 30 kg with one hand." },
+      { en: "borrow", jp: "（無料で）借りる", col: "borrow three books / a recipe book", ex: "May I borrow this recipe book?" },
+      { en: "set the table", jp: "食卓を整える・準備する", col: "set the table before dinner", ex: "Should I set the table now?" },
+      { en: "clear the dishes", jp: "皿を片付ける", col: "clear the dishes after eating", ex: "He will clear the dishes." },
+      { en: "leave food", jp: "食べ残す", col: "leave food on one's plate", ex: "Don't leave food on your plate." }
+    ];
+
+    function renderVerbs() {
+      const query = (document.getElementById('verb-search')?.value || '').toLowerCase();
+      const grid = document.getElementById('verb-grid');
+
+      const filtered = verbData.filter(v => 
+        v.en.toLowerCase().includes(query) || v.jp.includes(query)
+      );
+
+      grid.innerHTML = filtered.map(v => `
+        <div class="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 flex flex-col justify-between hover:shadow-md transition">
+          <div class="space-y-2">
+            <div class="flex justify-between items-start">
+              <h4 class="font-extrabold text-brand-blue text-base sm:text-lg">${v.en}</h4>
+              <button onclick="playTTS('${v.en.replace(/'/g, "\\'")}')" class="w-8 h-8 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center hover:bg-brand-yellow transition">
+                <i class="fa-solid fa-volume-high text-xs"></i>
+              </button>
+            </div>
+            <p class="text-xs font-bold text-brand-pink bg-pink-50 px-2.5 py-1 rounded-lg inline-block">${v.jp}</p>
+            <p class="text-xs text-gray-500"><strong>コロケーション:</strong> ${v.col}</p>
+          </div>
+          <div class="mt-3 pt-3 border-t border-gray-100 text-xs text-gray-600">
+            💬 <em>"${v.ex}"</em>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ---------------- NOUN BANK DATA ----------------
+    const nounData = [
+      { en: "recipe", jp: "レシピ・調理法", note: "recipe for (~のレシピ)", ex: "I don't know the recipe." },
+      { en: "vegetarian", jp: "菜食主義者（ベジタリアン）", note: "a person who eats no meat", ex: "He may be a vegetarian." },
+      { en: "dairy products", jp: "乳製品", note: "milk, cheese, butter etc.", ex: "Does this contain dairy products?" },
+      { en: "seasoning [salt]", jp: "調味料 [塩]", note: "add salt / seasoning", ex: "You may have put too much salt." },
+      { en: "hot [spicy] food", jp: "辛い食べ物", note: "spicy chili pepper food", ex: "It might be spicy food." },
+      { en: "unicycle", jp: "一輪車", note: "ride a unicycle", ex: "I cannot ride a unicycle." },
+      { en: "firefighters", jp: "消防士たち", note: "save someone from fire", ex: "Firefighters were able to save the girl." },
+      { en: "nutritious", jp: "栄養価が高い（形容詞）", note: "rich in vitamins", ex: "Vegetables are very nutritious." }
+    ];
+
+    function renderNouns() {
+      const query = (document.getElementById('noun-search')?.value || '').toLowerCase();
+      const grid = document.getElementById('noun-grid');
+
+      const filtered = nounData.filter(n => 
+        n.en.toLowerCase().includes(query) || n.jp.includes(query)
+      );
+
+      grid.innerHTML = filtered.map(n => `
+        <div class="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 flex flex-col justify-between hover:shadow-md transition">
+          <div class="space-y-2">
+            <div class="flex justify-between items-start">
+              <h4 class="font-extrabold text-brand-blue text-base sm:text-lg">${n.en}</h4>
+              <button onclick="playTTS('${n.en.replace(/'/g, "\\'")}')" class="w-8 h-8 bg-pink-100 text-pink-700 rounded-xl flex items-center justify-center hover:bg-brand-pink hover:text-white transition">
+                <i class="fa-solid fa-volume-high text-xs"></i>
+              </button>
+            </div>
+            <p class="text-xs font-bold text-brand-teal bg-teal-50 px-2.5 py-1 rounded-lg inline-block">${n.jp}</p>
+            <p class="text-xs text-gray-500"><strong>メモ:</strong> ${n.note}</p>
+          </div>
+          <div class="mt-3 pt-3 border-t border-gray-100 text-xs text-gray-600">
+            💬 <em>"${n.ex}"</em>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ---------------- FLASHCARDS LOGIC ----------------
+    const flashcardsData = [
+      { en: "He can play the guitar.", jp: "彼はギターを弾くことができる。", cat: "助動詞: can (能力)", note: "現在の能力" },
+      { en: "Are you able to come again tomorrow?", jp: "あなたは明日もう一度来ることができますか？", cat: "助動詞: be able to (可能)", note: "状況的な可能" },
+      { en: "I was able to catch the last train.", jp: "最終電車に乗ることができた。", cat: "助動詞: was able to (達成)", note: "実際に達成できた事柄" },
+      { en: "John will be able to speak Japanese soon.", jp: "ジョンはすぐに日本語を話せるようになるだろう。", cat: "助動詞: will be able to (未来)", note: "未来の可能" },
+      { en: "Her story may be true.", jp: "彼女の話は本当かもしれない。", cat: "助動詞: may (推量)", note: "〜かもしれない" },
+      { en: "He can't be serious.", jp: "彼が本気（真剣）のはずがない！", cat: "助動詞: can't (否定確信)", note: "〜のはずがない" },
+      { en: "May I borrow this recipe book?", jp: "このレシピ本をお借りしてもよろしいですか？", cat: "助動詞: May I...? (丁寧許可)", note: "〜してもよろしいですか" },
+      { en: "It may have rained last night.", jp: "昨夜、雨が降ったのかもしれない。", cat: "助動詞＋have p.p. (過去推量)", note: "過去の推量" },
+      { en: "He cannot have forgotten my birthday.", jp: "彼が私の誕生日を忘れたはずがない。", cat: "助動詞＋have p.p. (過去否定)", note: "過去の否定確信" },
+      { en: "You should have cleaned your room.", jp: "あなたは部屋を掃除しておくべきだったのに。", cat: "助動詞＋have p.p. (後悔)", note: "〜すべきだった（のに…）" },
+      { en: "The door wouldn't open.", jp: "ドアはどうしても開かなかった。", cat: "助動詞: wouldn't (拒絶)", note: "過去の強い拒絶" },
+      { en: "I would often swim at this beach.", jp: "よくこの海岸で泳いだものだ。", cat: "助動詞: would often (習慣)", note: "過去の思い出・習慣" },
+      { en: "cook in a microwave", jp: "電子レンジで調理する", cat: "重要熟語", note: "動詞フレーズ" },
+      { en: "tell the difference", jp: "違いがわかる・見分ける", cat: "重要熟語", note: "動詞フレーズ" },
+      { en: "dairy products", jp: "乳製品", cat: "名詞", note: "牛乳・チーズなど" }
+    ];
+
+    let currentCardIdx = 0;
+    let activeDeck = 'all';
+    let filteredDeck = [...flashcardsData];
+
+    function setFlashDeck(deckType) {
+      activeDeck = deckType;
+      document.querySelectorAll('.flash-deck-btn').forEach(b => {
+        b.classList.remove('bg-brand-purple', 'text-white');
+        b.classList.add('bg-gray-100', 'text-gray-600');
+      });
+      event.target.classList.add('bg-brand-purple', 'text-white');
+
+      if (deckType === 'aux') {
+        filteredDeck = flashcardsData.filter(c => c.cat.includes('助動詞'));
+      } else if (deckType === 'vocab') {
+        filteredDeck = flashcardsData.filter(c => !c.cat.includes('助動詞'));
+      } else {
+        filteredDeck = [...flashcardsData];
+      }
+
+      currentCardIdx = 0;
+      updateCardUI();
+    }
+
+    function flipCard() {
+      const el = document.getElementById('flashcard-el');
+      el.classList.toggle('flipped');
+    }
+
+    function updateCardUI() {
+      const el = document.getElementById('flashcard-el');
+      el.classList.remove('flipped');
+
+      const card = filteredDeck[currentCardIdx] || flashcardsData[0];
+      document.getElementById('fc-english').textContent = card.en;
+      document.getElementById('fc-japanese').textContent = card.jp;
+      document.getElementById('fc-category').textContent = `[ ${card.cat} ]`;
+      document.getElementById('fc-note').textContent = `※${card.note}`;
+      document.getElementById('fc-progress').textContent = `Card ${currentCardIdx + 1} / ${filteredDeck.length}`;
+    }
+
+    function nextCard() {
+      if (currentCardIdx < filteredDeck.length - 1) {
+        currentCardIdx++;
+        updateCardUI();
+      } else {
+        currentCardIdx = 0;
+        updateCardUI();
+      }
+    }
+
+    function prevCard() {
+      if (currentCardIdx > 0) {
+        currentCardIdx--;
+        updateCardUI();
+      } else {
+        currentCardIdx = filteredDeck.length - 1;
+        updateCardUI();
+      }
+    }
+
+    function playFlashcardAudio(e) {
+      e.stopPropagation();
+      const card = filteredDeck[currentCardIdx];
+      playTTS(card.en);
+    }
+
+    // INITIALIZATION ON LOAD
+    window.onload = function() {
+      renderQuiz();
+      renderVerbs();
+      renderNouns();
+      updateCardUI();
+    };
+  </script>
+</body>
+</html>
