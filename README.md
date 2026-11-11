@@ -1,0 +1,2 @@
+# R08_1no4_Lesson6_AuxilliaryVerbs_SelfStudySite
+論理表現I‗Ro8＿助動詞Lesson６‗サイト
